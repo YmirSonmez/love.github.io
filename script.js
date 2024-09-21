@@ -141,7 +141,7 @@ var init = function () {
     loop();
 
     // Sayaç kısmı
-    const targetDate = new Date('2023-03-25T12:00:00'); // Belirlediğiniz tarih
+    const targetDate = new Date('2024-03-25T00:00:00'); // Belirlediğiniz tarih
 
     function updateCounter() {
         const now = new Date();
