@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aşk Slot Makinesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFF0F5;
+        }
+        .slot-machine {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .reels {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .reel {
+            font-size: 50px;
+            background-color: #FFC0CB;
+            border-radius: 10px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+            text-align: center;
+        }
+        .modal img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slot-machine">
+        <h1>Aşk Slot Makinesi</h1>
+        <div class="reels">
+            <div class="reel" id="reel1">⭐</div>
+            <div class="reel" id="reel2">❤️</div>
+            <div class="reel" id="reel3">😍</div>
+        </div>
+        <button onclick="spin()" id="spinButton">Çevir</button>
+    </div>
+
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <img id="winImage" src="" alt="Aşk Resmi">
+            <p id="winText"></p>
+            <button onclick="closeModal()">Kapat</button>
+        </div>
+    </div>
+
+    <script>
+        const emojis = ['⭐', '❤️', '😍', '💖', '🌟', '💕'];
+        const loveImages = [
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
+            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg'
+        ];
+        const imageTexts = [
+            "Seninle her anım, yıldızlar kadar parlak.",
+	    "Kalbimin en güzel melodisi, senin sesinde saklı.",
+	    "Gözlerinde kaybolduğum o ışık, aşkın en saf hali.",
+	    "Seninle hayatımın her rengi daha canlı.",
+	    "Seninle yaşadığım aşk, tüm yıldızlardan daha parlak.",
+	    "Kalbim, seninle her daim aşkla çarpıyor."
+        ];
+
+        function getRandomEmoji() {
+            const randomNumber = Math.random();
+            if (randomNumber < 0.6) {
+                return 1; // 40% şans ile kalp (❤️) çıkacak
+            } else {
+                return Math.floor(Math.random() * emojis.length);
+            }
+        }
+
+        function spin() {
+            const button = document.getElementById('spinButton');
+            button.disabled = true;
+            button.textContent = 'Dönüyor...';
+
+            let spins = 0;
+            const maxSpins = 20;
+            const interval = setInterval(() => {
+                document.getElementById('reel1').textContent = emojis[getRandomEmoji()];
+                document.getElementById('reel2').textContent = emojis[getRandomEmoji()];
+                document.getElementById('reel3').textContent = emojis[getRandomEmoji()];
+
+                spins++;
+                if (spins >= maxSpins) {
+                    clearInterval(interval);
+                    checkWin();
+                    button.disabled = false;
+                    button.textContent = 'Çevir';
+                }
+            }, 100);
+        }
+
+        function checkWin() {
+            const reel1 = document.getElementById('reel1').textContent;
+            const reel2 = document.getElementById('reel2').textContent;
+            const reel3 = document.getElementById('reel3').textContent;
+
+            if (reel1 === '❤️' && reel2 === '❤️' && reel3 === '❤️') {
+                const randomIndex = Math.floor(Math.random() * loveImages.length);
+                document.getElementById('winImage').src = loveImages[randomIndex];
+                document.getElementById('winText').textContent = imageTexts[randomIndex];
+                document.getElementById('winModal').style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('winModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
