@@ -3,49 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aşk Slot Makinesi</title>
+    <title>Slot Makinesi</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #FFF0F5;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #FF69B4, #FFB6C1, #FFC0CB);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .slot-machine {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #FF1493;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .reels-container {
+            background-color: #FFB6C1;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
         .reels {
             display: flex;
             justify-content: space-around;
-            margin: 20px 0;
         }
         .reel {
             font-size: 50px;
-            background-color: #FFC0CB;
+            background-color: #FFF;
             border-radius: 10px;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .reel-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: top 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .reel-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
         }
         button {
-            background-color: #FF69B4;
+            background-color: #FF1493;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 50px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 10px;
         }
-        button:disabled {
+        .button:hover {
+            background-color: #FF69B4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -57,20 +114,74 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
         }
         .modal-content {
             background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 300px;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
             text-align: center;
+            animation: slideIn 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         .modal img {
             max-width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .modal p {
+            color: #FF1493;
+            font-size: 20px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .close-button {
+            background-color: #FF1493;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .close-button:hover {
+            background-color: #FF69B4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 480px) {
+            .slot-machine {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .reel {
+                font-size: 40px;
+                width: 60px;
+                height: 90px;
+            }
+            .reel-item {
+                height: 90px;
+            }
+            .spin-button {
+                padding: 12px 24px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -96,25 +207,25 @@
     <script>
         const emojis = ['⭐', '❤️', '😍', '💖', '🌟', '💕'];
         const loveImages = [
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg',
-            'https://i.pinimg.com/originals/d1/e3/83/d1e3838fb285c663bf39ea3ed53f2a5b.jpg'
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdf6bTysxGkd-rtpAbNlBgrvH5UDJktbhXag&s'
         ];
         const imageTexts = [
-            "Seninle her anım, yıldızlar kadar parlak.",
-	    "Kalbimin en güzel melodisi, senin sesinde saklı.",
-	    "Gözlerinde kaybolduğum o ışık, aşkın en saf hali.",
-	    "Seninle hayatımın her rengi daha canlı.",
-	    "Seninle yaşadığım aşk, tüm yıldızlardan daha parlak.",
-	    "Kalbim, seninle her daim aşkla çarpıyor."
+            "Kazandığım en güzel kumar sensin.",
+            "Kazandığım en güzel kumar sensin.",
+            "Kazandığım en güzel kumar sensin.",
+            "Kazandığım en güzel kumar sensin.",
+            "Kazandığım en güzel kumar sensin.",
+            "Kazandığım en güzel kumar sensin.",
         ];
 
         function getRandomEmoji() {
             const randomNumber = Math.random();
-            if (randomNumber < 0.6) {
+            if (randomNumber < 0.7) {
                 return 1; // 40% şans ile kalp (❤️) çıkacak
             } else {
                 return Math.floor(Math.random() * emojis.length);
