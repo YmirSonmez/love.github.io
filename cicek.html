@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnteraktif Mobil Web Sitesi</title>
+    <!-- Zarif ama daha okunabilir bir font kullanımı -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Playfair Display', serif; /* Daha zarif ve okunabilir bir font */
+        }
+        .container {
+            background-image: url('photo.png');
+            background-size: cover;
+            background-position: center;
+            height: 5760px;
+            width: 1080px;
+            display: flex;
+            flex-direction: column;
+        }
+        .section {
+            height: 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 8vh; /* Yazı boyutu hafif küçültüldü ama okunabilirliği yüksek tutuldu */
+            text-align: center;
+            letter-spacing: 1.5px; /* Harf aralığı ayarlandı */
+        }
+        .dot {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 20px auto;
+            cursor: pointer;
+            margin-bottom: 50vh;
+        }
+        .click-text {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: -webkit-xxx-large;
+        }
+        .overlay img {
+            max-width: 80%;
+            max-height: 60%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section" id="section1"></div>
+        <div class="section" id="section2"></div>
+        <div class="section" id="section3"></div>
+        <div class="section">
+            <div>
+                <p class="click-text">TIKLA</p>
+                <div class="dot" id="dot"></div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="overlay">
+        <h2 id="overlayText"></h2>
+        <img src="gizli.png" alt="Gizli Resim" id="hiddenImage" style="display:none;">
+        <p id="imageText" style="display:none;"></p>
+    </div>
+
+    <script>
+        const texts = [
+            "FATMA",
+            "Çiçeklerle süslenmiş bu sayfanın içinde",
+            "En güzel çiçeği aramaya koyuldum",
+        ];
+
+        function animateText(element, text) {
+            let index = 0;
+            element.textContent = '';
+            element.style.opacity = 0.70;
+            function addLetter() {
+                if (index < text.length) {
+                    element.textContent += text[index];
+                    element.style.opacity = parseFloat(element.style.opacity) + 0.05; // Şık bir geçiş animasyonu
+                    index++;
+                    setTimeout(addLetter, 120); // Daha yavaş harf ekleme süresi
+                }
+            }
+            addLetter();
+        }
+
+        texts.forEach((text, index) => {
+            setTimeout(() => {
+                animateText(document.getElementById(`section${index + 1}`), text);
+            }, index * 2500); // Animasyonlar arası geçiş süresi artırıldı
+        });
+
+        const dot = document.getElementById('dot');
+        const overlay = document.getElementById('overlay');
+        const overlayText = document.getElementById('overlayText');
+        const hiddenImage = document.getElementById('hiddenImage');
+        const imageText = document.getElementById('imageText');
+
+        dot.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            animateText(overlayText, "En sonunda buldum!");
+            setTimeout(() => {
+                hiddenImage.style.display = 'block';
+                setTimeout(() => {
+                    imageText.style.display = 'block';
+                    animateText(imageText, "Tüm çiçeklerin en güzeli... İyi ki varsın!");
+                }, 1000);
+            }, 3000);
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            hiddenImage.style.display = 'none';
+            imageText.style.display = 'none';
+            overlayText.textContent = '';
+            imageText.textContent = '';
+        });
+    </script>
+</body>
+</html>
