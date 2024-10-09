@@ -14,7 +14,7 @@
             font-family: 'Playfair Display', serif; /* Daha zarif ve okunabilir bir font */
         }
         .container {
-            background-image: url('photo.png');
+            background-image: url('İstanbul.png');
             background-size: cover;
             background-position: center;
             height: 5760px;
@@ -84,21 +84,21 @@
     </div>
     <div class="overlay" id="overlay">
         <h2 id="overlayText"></h2>
-        <img src="gizli.png" alt="Gizli Resim" id="hiddenImage" style="display:none;">
+        <img src="gizli" alt="Ayşe" id="hiddenImage" style="display:none;">
         <p id="imageText" style="display:none;"></p>
     </div>
 
     <script>
         const texts = [
-            "FATMA",
-            "Çiçeklerle süslenmiş bu sayfanın içinde",
-            "En güzel çiçeği aramaya koyuldum",
+            "AYŞE",
+            "Ah İstanbul İstanbul Olalı",
+            "Hiç Görmedi Böyle Keder",
         ];
 
         function animateText(element, text) {
             let index = 0;
             element.textContent = '';
-            element.style.opacity = 0.70;
+            element.style.opacity = 0.95;
             function addLetter() {
                 if (index < text.length) {
                     element.textContent += text[index];
@@ -124,12 +124,12 @@
 
         dot.addEventListener('click', () => {
             overlay.style.display = 'flex';
-            animateText(overlayText, "En sonunda buldum!");
+            animateText(overlayText, "Geberiyorum aşkınla...");
             setTimeout(() => {
                 hiddenImage.style.display = 'block';
                 setTimeout(() => {
                     imageText.style.display = 'block';
-                    animateText(imageText, "Tüm çiçeklerin en güzeli... İyi ki varsın!");
+                    animateText(imageText, "İyi ki tanımışım seni!");
                 }, 1000);
             }, 3000);
         });
