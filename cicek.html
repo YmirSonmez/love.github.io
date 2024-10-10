@@ -14,7 +14,7 @@
             font-family: 'Playfair Display', serif; /* Daha zarif ve okunabilir bir font */
         }
         .container {
-            background-image: url('İstanbul.png');
+            background-image: url('Yildizlar.png');
             background-size: cover;
             background-position: center;
             height: 5760px;
@@ -84,15 +84,15 @@
     </div>
     <div class="overlay" id="overlay">
         <h2 id="overlayText"></h2>
-        <img src="gizli" alt="Ayşe" id="hiddenImage" style="display:none;">
+        <img src="cat.jpg" alt="Deniz" id="hiddenImage" style="display:none;">
         <p id="imageText" style="display:none;"></p>
     </div>
 
     <script>
         const texts = [
-            "AYŞE",
-            "Ah İstanbul İstanbul Olalı",
-            "Hiç Görmedi Böyle Keder",
+            "Deniz",
+            "Herkes yıldızlara bakmak için",
+            "Gökyüzüne bakar oysa",
         ];
 
         function animateText(element, text) {
@@ -124,7 +124,7 @@
 
         dot.addEventListener('click', () => {
             overlay.style.display = 'flex';
-            animateText(overlayText, "Geberiyorum aşkınla...");
+            animateText(overlayText, "Benim sana bakmam yetiyor...");
             setTimeout(() => {
                 hiddenImage.style.display = 'block';
                 setTimeout(() => {
