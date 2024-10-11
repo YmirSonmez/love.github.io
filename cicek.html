@@ -14,7 +14,7 @@
             font-family: 'Playfair Display', serif; /* Daha zarif ve okunabilir bir font */
         }
         .container {
-            background-image: url('yildizlar.png');
+            background-image: url('film.png.PNG');
             background-size: cover;
             background-position: center;
             height: 5760px;
@@ -28,7 +28,7 @@
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 8vh; /* Yazı boyutu hafif küçültüldü ama okunabilirliği yüksek tutuldu */
+            font-size: 10vh; /* Yazı boyutu hafif küçültüldü ama okunabilirliği yüksek tutuldu */
             text-align: center;
             letter-spacing: 1.5px; /* Harf aralığı ayarlandı */
         }
@@ -84,15 +84,15 @@
     </div>
     <div class="overlay" id="overlay">
         <h2 id="overlayText"></h2>
-        <img src="cat.jpg" alt="Deniz" id="hiddenImage" style="display:none;">
+        <img src="" alt="berkan" id="hiddenImage" style="display:none;">
         <p id="imageText" style="display:none;"></p>
     </div>
 
     <script>
         const texts = [
-            "Deniz",
-            "Herkes yıldızlara bakmak için",
-            "Gökyüzüne bakar oysa",
+            "Lale",
+            "Hayatım bir film olsa...",
+            "Asla değişmemesini isteyecğim bir şey var...",
         ];
 
         function animateText(element, text) {
@@ -124,12 +124,12 @@
 
         dot.addEventListener('click', () => {
             overlay.style.display = 'flex';
-            animateText(overlayText, "Benim sana bakmam yetiyor...");
+            animateText(overlayText, "Hep başrolünde sen ol isterim...");
             setTimeout(() => {
                 hiddenImage.style.display = 'block';
                 setTimeout(() => {
                     imageText.style.display = 'block';
-                    animateText(imageText, "İyi ki tanımışım seni!");
+                    animateText(imageText, "Leleri üzmeyin!");
                 }, 1000);
             }, 3000);
         });
