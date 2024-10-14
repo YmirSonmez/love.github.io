@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Arka Plan Örneği</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Sayfa varsayılan margin ve padding kaldırılır */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Sayfa yüksekliği en az 100vh olacak şekilde ayarlanır */
+        html, body {
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden; /* Yatay kaydırmayı engeller */
+        }
+
+        /* Video arka planı ve içerik */
+        .video-container {
+            position: relative;
+            width: 100vw; /* Görüntü alanının genişliğini alır */
+            height: 100%; /* Yükseklik tam sayfa olacak şekilde ayarlanır */
+            overflow-y: auto; /* Dikey kaydırmayı açar */
+        }
+
+        .video-container video {
+            position: relative;
+            width: 100%; /* Genişliği görüntü alanına göre ayarlar */
+            height: auto; /* Yüksekliği görüntü alanına göre ayarlar */
+            object-fit: cover; /* Videoyu tam kapsar */
+        }
+
+        /* Yazıların tasarımı ve animasyonu */
+        .text-section {
+            position: absolute;
+            width: 100%;
+            color: black; /* Yazı rengi */
+            font-size: 8vw; /* Yazı boyutu */
+            text-align: center; /* Ortaya hizalama */
+            opacity: 0; /* Başlangıçta görünmez */
+            animation: slideIn 1s forwards; /* Fade-in animasyonu */
+        }
+
+        /* Alt metinlerin tasarımı */
+        .sub-text {
+            font-size: 4vw; /* Alt metin boyutu */
+            margin-top: 5px; /* Üstten boşluk */
+            color: rgba(0, 0, 0); /* Alt metin rengi */
+            opacity: 1.5;
+            background-color: rgba(255, 255, 255, 0.4); /* Arka plan rengi */
+            padding: 5px;
+        }
+
+        /* Yazıların yükseklikleri */
+        .text-section:nth-child(2) {
+            top: 18%; /* İlk bölüm */
+            animation-delay: 0.5s; /* İlk animasyon gecikmesi */
+        }
+
+        .text-section:nth-child(3) {
+            top: 46%; /* İkinci bölüm */
+            animation-delay: 1.5s; /* İkinci animasyon gecikmesi */
+        }
+
+        .text-section:nth-child(4) {
+            top: 72%; /* Üçüncü bölüm */
+            animation-delay: 2.5s; /* Üçüncü animasyon gecikmesi */
+        }
+
+        .text-section:nth-child(5) {
+            top: 85%; /* Dördüncü bölüm */
+            animation-delay: 3.5s; /* Dördüncü animasyon gecikmesi */
+        }
+
+        /* Yazıların yukarıdan aşağıya gelme animasyonu */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px); /* Başlangıç konumu yukarıda */
+                opacity: 0; /* Başlangıçta görünmez */
+            }
+            100% {
+                transform: translateY(0); /* Son konum normal */
+                opacity: 1; /* Son durumda görünür hale gelir */
+            }
+        }
+        #mp3-player{
+          background: white;
+          width: 90vw;
+          height: 22vw;
+          border-radius: 10px;
+          position: absolute;
+          top: 88%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          box-shadow: 0 5px 10px 0px rgba(0,0,0,0.3);
+        }
+        img{
+          width: 20vw;
+          height: 100%;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+        #text{
+          display: inline-block;
+          vertical-align: top;
+          margin: 30px;
+        }
+        span{
+          font-size: 4vw;
+        }
+        p{
+          color: #999;
+          font-weight: bold;
+          font-size: 3vw;
+        }
+        #start{
+          display: inline-block;
+          width: 10vw;
+          height: 10vw;
+          border-radius: 100%;
+          box-shadow: 0 0 45px 2px #ccc, 0px 0px 0 3px #bcdcfa;
+          vertical-align: top;
+          margin: 6vw 0 0 10vw;
+        }
+        #start p{
+          position: relative;
+          top: 50%;
+          left: 90%;
+          transform: translate(-50%,-50%);
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video autoplay muted loop>
+            <source src="ist.mp4" type="video/mp4">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <div class="text-section">Dilan
+        </div>
+        <div class="text-section">Kalbimin Sahibi
+            <div class="sub-text">Sen, kalbimin en derin köşesinde saklı olan tüm sevgiyi taşıyorsun. Bu hediye, sana olan sevgimin bir yansıması. Her zaman yanımda ol, kalbim hep seninle.</div>
+        </div>
+        <div class="text-section">Aşkımızın Anısı
+            <div class="sub-text">Her anımız bir hatıra, her hatıra bir sevgidir. Bu hediye, aşkımızın en güzel anısını yaşatmak için. Unutma, her zaman seni seviyorum.</div>
+        </div>
+        <div id="mp3-player">
+          <img src="albüm.png" alt="" />
+          <div id="text">
+           <span>Enercii</span>
+           <p>Dilan Polat</p>
+          </div>
+          <div id="start">
+            <p>| |</p>
+          </div>
+        </div>
+    </div>
+    <audio id="myAudio" loop>
+        <source src="enerci.mp3" type="audio/mpeg">
+        Tarayıcınız ses dosyasını desteklemiyor.
+    </audio>
+
+    <script>
+        document.body.addEventListener('click', function() {
+            var audio = document.getElementById('myAudio');
+            audio.play().catch(function(error) {
+                console.log('Oynatma hatası:', error);
+            });
+        });
+    </script>
+</body>
+</html>
